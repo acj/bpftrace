@@ -3,7 +3,7 @@ add_compile_options("-Wno-undef")
 if (STATIC_LIBC)
   # STATIC_LIBC will set linker flags to -static. We don't want this for
   # testprogs linking, so we clear the flags.
-  unset(CMAKE_EXE_LINKER_FLAGS)
+  set(CMAKE_EXE_LINKER_FLAGS "-lz")
 endif()
 
 # Regenerate codegen_includes.cpp whenever anything in the tests/codegen
@@ -61,7 +61,7 @@ if(STATIC_LINKING)
     set_target_properties(bpftrace_test PROPERTIES LINK_FLAGS "${EMBEDDED_LINK_FLAGS}")
   endif()
   if(STATIC_LIBC)
-    set_target_properties(bpftrace_test PROPERTIES LINK_FLAGS "-static")
+    set_target_properties(bpftrace_test PROPERTIES LINK_FLAGS "-static -lz")
   endif()
 endif(STATIC_LINKING)
 
