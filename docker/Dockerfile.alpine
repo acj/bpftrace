@@ -1,4 +1,4 @@
-ARG ALPINE_VERSION="3.13"
+ARG ALPINE_VERSION="edge"
 ARG LLVM_VERSION="10"
 
 FROM alpine:${ALPINE_VERSION}
@@ -25,6 +25,8 @@ RUN apk add --update \
   zlib \
   zlib-dev \
   zlib-static
+
+#RUN apk del bcc libelf zlib
 
 WORKDIR /
 
