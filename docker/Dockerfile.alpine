@@ -15,11 +15,11 @@ RUN apk add --update \
   clang-dev \
   clang-static \
   cmake \
-  elfutils-dev \
   flex-dev \
   git \
   gtest-dev \
   libc6-compat \
+  libelf-static \
   linux-headers \
   llvm${LLVM_VERSION}-dev \
   llvm${LLVM_VERSION}-static \
@@ -30,8 +30,7 @@ RUN apk add --update \
 
 WORKDIR /
 
-RUN mv /usr/lib/libbccbpf.a /usr/lib/libbcc_bpf.a && \
-    ln -s $(which python3) /usr/bin/python && \
+RUN ln -s $(which python3) /usr/bin/python && \
     ln -s /lib /lib/x86_64-linux-gnu
 
 RUN wget https://github.com/USCiLab/cereal/archive/refs/tags/v${CEREAL_VERSION}.tar.gz && \
