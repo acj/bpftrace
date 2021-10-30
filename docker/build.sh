@@ -18,8 +18,8 @@ BUILD_LIBBPF=${BUILD_LIBBPF:-OFF}
 CC=${CC:cc}
 CXX=${CXX:c++}
 
-if [[ $LLVM_VERSION -eq 13 ]]; then 
-  touch /usr/lib/llvm-13/bin/llvm-omp-device-info
+if [[ $LLVM_VERSION -eq 13 ]]; then
+  touch /usr/lib/llvm13/bin/llvm-omp-device-info
 fi
 
 if [[ $BUILD_LIBBPF = ON ]]; then
