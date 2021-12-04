@@ -1,6 +1,6 @@
 name: Embedded Builds
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 jobs:
   llvm_clang:
     runs-on: ubuntu-18.04
@@ -36,7 +36,7 @@ jobs:
           BUILD_LIBBPF: ON
         - TYPE: Debug
           NAME: alpine
-          LLVM_VERSION: 9
+          LLVM_VERSION: 12
           STATIC_LINKING: ON
           STATIC_LIBC: ON
           EMBED_BUILD_LLVM: OFF
@@ -45,11 +45,12 @@ jobs:
           RUNTIME_TEST_DISABLE: json-output.join_delim,other.string compare map lookup,probe.kprobe_offset_fail_size,probe.uprobe_library,usdt."usdt probes - attach to fully specified probe of child",usdt."usdt probes - all probes by wildcard and file with child",usdt."usdt probes - attach to probe by wildcard and file with child",usdt."usdt probes - attach to probes by wildcard file with child",usdt."usdt probes - attach to probe on multiple files by wildcard",usdt."usdt probes - attach to probe with probe builtin and args by file with child",usdt."usdt probes - list probes by pid in separate mountns",usdt."usdt sized arguments",usdt."usdt - list probes by file with wildcarded probe type",uprobe."uprobes - list probes by pid; uprobes only",uprobe."uprobes - list probes by pid in separate mount namespace",other.positional pointer arithmetics
           BASE: alpine
           DISTRO: alpine
-          ALPINE_VERSION: 3.11
+          ALPINE_VERSION: 3.15
           VENDOR_GTEST: ON
+          BUILD_LIBBPF: ON
         - TYPE: Release
           NAME: alpine
-          LLVM_VERSION: 9
+          LLVM_VERSION: 12
           STATIC_LINKING: ON
           STATIC_LIBC: ON
           EMBED_BUILD_LLVM: OFF
@@ -57,8 +58,9 @@ jobs:
           RUNTIME_TEST_DISABLE: other.string compare map lookup,probe.kprobe_offset_fail_size,probe.uprobe_library,usdt."usdt probes - attach to fully specified probe of child",usdt."usdt probes - all probes by wildcard and file with child",usdt."usdt probes - attach to probe by wildcard and file with child",usdt."usdt probes - attach to probes by wildcard file with child",usdt."usdt probes - attach to probe on multiple files by wildcard",usdt."usdt probes - attach to probe with probe builtin and args by file with child",usdt."usdt probes - list probes by pid in separate mountns",usdt."usdt sized arguments",usdt."usdt - list probes by file with wildcarded probe type",uprobe."uprobes - list probes by pid; uprobes only",uprobe."uprobes - list probes by pid in separate mount namespace",other.positional pointer arithmetics
           BASE: alpine
           DISTRO: alpine
-          ALPINE_VERSION: 3.11
+          ALPINE_VERSION: 3.15
           VENDOR_GTEST: ON
+          BUILD_LIBBPF: ON
     steps:
     - uses: actions/checkout@v2
     - name: Build docker container
