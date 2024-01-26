@@ -1110,7 +1110,7 @@ void AttachedProbe::attach_multi_uprobe(int pid)
   DECLARE_LIBBPF_OPTS(bpf_link_create_opts, opts);
 
   opts.uprobe_multi.path = probe_.path.c_str();
-  opts.uprobe_multi.offsets = offsets.data();
+  opts.uprobe_multi.offsets = (const long unsigned int *)offsets.data();
   opts.uprobe_multi.cnt = offsets.size();
   opts.uprobe_multi.flags = probe_.type == ProbeType::uretprobe
                                 ? BPF_F_UPROBE_MULTI_RETURN
