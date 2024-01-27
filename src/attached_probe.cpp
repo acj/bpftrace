@@ -1034,7 +1034,7 @@ static void resolve_offset_uprobe_multi(const std::string &path,
                                         const std::string &probe_name,
                                         const std::vector<std::string> &funcs,
                                         std::vector<std::string> &syms,
-                                        std::vector<uint64_t> &offsets)
+                                        std::vector<unsigned long> &offsets)
 {
   struct bcc_symbol_option option = {};
   int err;
@@ -1099,7 +1099,7 @@ static void resolve_offset_uprobe_multi(const std::string &path,
 void AttachedProbe::attach_multi_uprobe(int pid)
 {
   std::vector<std::string> syms;
-  std::vector<uint64_t> offsets;
+  std::vector<unsigned long> offsets;
   unsigned int i;
 
   // Resolve probe_.funcs into offsets and syms vector
@@ -1110,7 +1110,7 @@ void AttachedProbe::attach_multi_uprobe(int pid)
   DECLARE_LIBBPF_OPTS(bpf_link_create_opts, opts);
 
   opts.uprobe_multi.path = probe_.path.c_str();
-  opts.uprobe_multi.offsets = (const long unsigned int *)offsets.data();
+  opts.uprobe_multi.offsets = offsets.data();
   opts.uprobe_multi.cnt = offsets.size();
   opts.uprobe_multi.flags = probe_.type == ProbeType::uretprobe
                                 ? BPF_F_UPROBE_MULTI_RETURN
